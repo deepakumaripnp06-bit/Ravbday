@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy Birthday Rav 💖</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(to bottom, #ffd6e8, #fff);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+}
+
+.container {
+    width: 90%;
+    max-width: 420px;
+}
+
+.teddy {
+    font-size: 110px;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+.blink {
+    animation: blink 4s infinite;
+}
+
+@keyframes blink {
+    0%, 95%, 100% { opacity: 1; }
+    96%, 99% { opacity: 0; }
+}
+
+.box {
+    background: white;
+    padding: 20px;
+    border-radius: 18px;
+    box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+    margin-top: 10px;
+}
+
+button {
+    margin: 10px;
+    padding: 12px 22px;
+    border: none;
+    border-radius: 25px;
+    background: #ff6f91;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #ff4f7b;
+}
+
+.envelope {
+    font-size: 65px;
+    cursor: pointer;
+    margin-top: 12px;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.hidden {
+    display: none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="teddy blink">🧸</div>
+
+    <div class="box" id="message">
+        Hi Rav 🥹<br><br>
+        How are you today? 💖
+    </div>
+
+    <div id="buttons">
+        <button onclick="notGood()">Not good 😔</button>
+        <button onclick="awesome()">Awesome 😄</button>
+    </div>
+
+    <div id="envelopeSection" class="hidden">
+        <div class="box">
+            Smile with your heart 💕<br>
+            I’m here with you 🧸<br><br>
+            Someone left this for you…
+            <div class="envelope" onclick="openLetter()">💌</div>
+        </div>
+    </div>
+
+    <div id="letter" class="hidden">
+        <div class="box">
+            🎂 Happy Birthday Rav 🎂<br><br>
+            Today is your birthday…<br>
+            I know I hurted you 😔<br><br>
+            But honestly, I wasn’t feeling well enough.<br><br>
+            I’m really sorry 🥺<br><br>
+            From today and from now on,<br>
+            please be happy 💖<br>
+            Don’t be sad.<br><br>
+            You matter a lot to me 🌸<br><br>
+            Happiest Birthday, Rav 🧸
+        </div>
+    </div>
+
+</div>
+
+<script>
+function notGood() {
+    document.getElementById("message").innerHTML =
+    "Oh no 😢<br><br>Tell me what happened…";
+
+    document.getElementById("buttons").classList.add("hidden");
+
+    setTimeout(() => {
+        document.getElementById("envelopeSection").classList.remove("hidden");
+    }, 2000);
+}
+
+function awesome() {
+    document.getElementById("message").innerHTML =
+    "Yayyy 😍<br><br>That makes me so happy 💕";
+
+    document.getElementById("buttons").classList.add("hidden");
+}
+
+function openLetter() {
+    document.getElementById("envelopeSection").classList.add("hidden");
+    document.getElementById("letter").classList.remove("hidden");
+}
+</script>
+
+</body>
+</html>
