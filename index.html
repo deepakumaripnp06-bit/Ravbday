@@ -179,18 +179,19 @@ body{
 </div>
 
 <script>
-function notGood(){
-  buttons.classList.add("hidden");
-  textBox.innerHTML="Smile with your heart. I’m here with you 💙";
-  envelope.classList.remove("hidden");
+        function notGood(){
+  document.getElementById("buttons").classList.add("hidden");
+  document.getElementById("textBox").innerHTML =
+  "Smile with your heart. I’m here with you 💙<br><br>I have something for you…";
+  document.getElementById("envelope").classList.remove("hidden");
 }
 
 function awesome(){
-  buttons.classList.add("hidden");
-  textBox.innerHTML="That’s great! I have something for you 🎁";
-  envelope.classList.remove("hidden");
+  document.getElementById("buttons").classList.add("hidden");
+  document.getElementById("textBox").innerHTML =
+  "That’s great! I have something special for you 🎁";
+  document.getElementById("envelope").classList.remove("hidden");
 }
-
 function openLetter(){
   envelope.classList.add("hidden");
   letterBox.classList.remove("hidden");
