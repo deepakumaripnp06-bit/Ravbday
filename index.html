@@ -1,11 +1,13 @@
-        <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>For Rav</title>
 
 <style>
 *{box-sizing:border-box}
+
 body{
   margin:0;
   font-family:"Segoe UI",sans-serif;
@@ -14,6 +16,7 @@ body{
   overflow:hidden;
 }
 
+/* MAIN SCENE */
 .scene{
   position:relative;
   width:100%;
@@ -23,25 +26,34 @@ body{
   justify-content:center;
 }
 
+/* TEDDY */
 .teddy{
   position:absolute;
-  left:5%;
-  bottom:12%;
+  bottom:14%;
+  left:50%;
+  transform:translateX(-50%);
+  z-index:2;
 }
 .teddy img{
   width:220px;
 }
 
+/* MESSAGE BOX */
 .centerBox{
+  position:absolute;
+  top:10%;
+  width:90%;
+  max-width:520px;
   background:white;
-  padding:28px;
+  padding:26px;
   border-radius:26px;
   box-shadow:0 18px 40px rgba(0,0,0,.25);
   font-size:22px;
   text-align:center;
-  max-width:520px;
+  z-index:3;
 }
 
+/* BUTTONS */
 .buttons button{
   margin:14px 10px;
   padding:14px 34px;
@@ -52,15 +64,14 @@ body{
   color:white;
 }
 
-.hidden{display:none}
-
-/* Envelope */
+/* ENVELOPE */
 .envelopeWrap{
   position:absolute;
+  bottom:18%;
   right:8%;
-  bottom:22%;
   cursor:pointer;
   animation:pop .9s ease;
+  z-index:2;
 }
 .envelope{
   width:260px;
@@ -88,43 +99,47 @@ body{
   border-radius:16px;
 }
 
-/* Letter */
-.letterBox{
+/* LETTER */
+.letterOverlay{
   position:fixed;
   inset:0;
   background:rgba(0,0,0,.35);
   display:flex;
   align-items:center;
   justify-content:center;
+  z-index:5;
 }
 .letter{
-  width:90%;
-  max-width:520px;
+  width:95%;
+  max-width:620px;
   background:url("assets/letter.png") center/cover no-repeat;
-  padding:80px 30px;
-  border-radius:28px;
+  padding:90px 30px;
+  border-radius:30px;
   font-size:22px;
   animation:pop 1s ease;
+  text-align:center;
 }
 
-/* Cake */
+/* CAKE */
 .cake{
   position:absolute;
-  right:12%;
-  bottom:12%;
+  bottom:14%;
+  right:10%;
+  z-index:2;
   animation:pop 1s ease;
 }
 .cake img{
   width:220px;
 }
 
-/* Confetti */
+/* CONFETTI */
 .confetti{
   position:fixed;
   top:-20px;
   width:10px;
   height:14px;
   animation:fall linear infinite;
+  z-index:1;
 }
 
 @keyframes fall{
@@ -134,6 +149,8 @@ body{
   from{transform:scale(0)}
   to{transform:scale(1)}
 }
+
+.hidden{display:none}
 </style>
 </head>
 
@@ -141,10 +158,12 @@ body{
 
 <div class="scene">
 
+  <!-- TEDDY -->
   <div class="teddy">
-    <img src="assets/teddy.gif">
+    <img src="assets/teddy.gif" alt="teddy">
   </div>
 
+  <!-- TEXT BOX -->
   <div class="centerBox" id="textBox">
     Hi Rav 🥹<br><br>
     How are you today?
@@ -154,13 +173,15 @@ body{
     </div>
   </div>
 
+  <!-- ENVELOPE -->
   <div class="envelopeWrap hidden" id="envelope" onclick="openLetter()">
     <div class="envelope">
       <div class="bow"></div>
     </div>
   </div>
 
-  <div class="letterBox hidden" id="letterBox">
+  <!-- LETTER -->
+  <div class="letterOverlay hidden" id="letterBox">
     <div class="letter">
       Today is your birthday.<br><br>
       I know I hurted you and I’m really sorry.<br>
@@ -172,48 +193,52 @@ body{
     </div>
   </div>
 
+  <!-- CAKE -->
   <div class="cake hidden" id="cake">
-    <img src="assets/cake.png">
+    <img src="assets/cake.png" alt="cake">
   </div>
 
 </div>
 
 <script>
-        function notGood(){
+function notGood(){
   document.getElementById("buttons").classList.add("hidden");
   document.getElementById("textBox").innerHTML =
-  "Smile with your heart. I’m here with you 💙<br><br>I have something for you…";
+    "Smile with your heart. I’m here with you 💙<br><br>I have something for you…";
   document.getElementById("envelope").classList.remove("hidden");
 }
 
 function awesome(){
   document.getElementById("buttons").classList.add("hidden");
   document.getElementById("textBox").innerHTML =
-  "That’s great! I have something special for you 🎁";
+    "That’s great! I have something special for you 🎁";
   document.getElementById("envelope").classList.remove("hidden");
 }
+
 function openLetter(){
-  envelope.classList.add("hidden");
-  letterBox.classList.remove("hidden");
+  document.getElementById("envelope").classList.add("hidden");
+  document.getElementById("letterBox").classList.remove("hidden");
 }
 
 function showCake(){
-  letterBox.classList.add("hidden");
-  cake.classList.remove("hidden");
+  document.getElementById("letterBox").classList.add("hidden");
+  document.getElementById("cake").classList.remove("hidden");
+  document.getElementById("textBox").innerHTML =
+    "I hope you succeed in your life ❤️🤞🏻";
   startConfetti();
-  textBox.innerHTML="I hope you succeed in your life ❤️🤞🏻";
 }
 
+/* CONTINUOUS FULL-SCREEN CONFETTI */
 function startConfetti(){
   setInterval(()=>{
-    for(let i=0;i<15;i++){
+    for(let i=0;i<35;i++){
       let c=document.createElement("div");
       c.className="confetti";
       c.style.left=Math.random()*100+"vw";
       c.style.background=["#2f7de1","#6fb8ff","#9fd3ff","#ffffff"][Math.floor(Math.random()*4)];
       c.style.animationDuration=(Math.random()*3+2)+"s";
       document.body.appendChild(c);
-      setTimeout(()=>c.remove(),6000);
+      setTimeout(()=>c.remove(),7000);
     }
   },400);
 }
