@@ -1,82 +1,61 @@
-            <!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Happy Birthday Rav 🎂</title>
+<title>For Rav 🧸</title>
 
 <style>
-body {
-    margin: 0;
-    font-family: 'Segoe UI', sans-serif;
-    background: linear-gradient(to bottom, #ffe6f0, #ffffff);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    overflow: hidden;
+body{
+  margin:0;
+  font-family:'Segoe UI',sans-serif;
+  background:linear-gradient(#ffe6f0,#fff);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  overflow:hidden;
 }
-
-.container {
-    width: 90%;
-    max-width: 420px;
-    text-align: center;
+.container{width:90%;max-width:420px;text-align:center;}
+.teddy{
+  font-size:110px;
+  animation:bounce 2s infinite;
 }
-
-.teddy {
-    font-size: 110px;
-    animation: bounce 2s infinite;
+@keyframes bounce{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-15px);}
 }
-
-@keyframes bounce {
-    0%,100% { transform: translateY(0); }
-    50% { transform: translateY(-15px); }
+.box{
+  background:white;
+  padding:20px;
+  border-radius:20px;
+  box-shadow:0 12px 25px rgba(0,0,0,.2);
+  margin-top:10px;
 }
-
-.box {
-    background: white;
-    padding: 20px;
-    border-radius: 20px;
-    box-shadow: 0 12px 30px rgba(0,0,0,0.2);
-    margin-top: 10px;
+button{
+  margin:10px;
+  padding:12px 22px;
+  border:none;
+  border-radius:25px;
+  background:#ff6f91;
+  color:white;
+  font-size:16px;
+  cursor:pointer;
 }
-
-button {
-    margin: 10px;
-    padding: 12px 22px;
-    border: none;
-    border-radius: 25px;
-    background: #ff6f91;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
+.hidden{display:none;}
+.envelope,.cake,.heart{font-size:80px;cursor:pointer;}
+.confetti{
+  position:fixed;
+  width:10px;height:10px;
+  animation:fall 3s linear infinite;
 }
-
-.hidden { display: none; }
-
-/* Cake */
-.cake {
-    font-size: 90px;
-    animation: pop 1.5s infinite;
+@keyframes fall{
+  0%{transform:translateY(-100px) rotate(0deg);}
+  100%{transform:translateY(100vh) rotate(360deg);}
 }
-
-@keyframes pop {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.15); }
-    100% { transform: scale(1); }
-}
-
-/* Confetti */
-.confetti {
-    position: fixed;
-    width: 10px;
-    height: 10px;
-    background: pink;
-    animation: fall 3s linear infinite;
-}
-
-@keyframes fall {
-    0% { transform: translateY(-100px) rotate(0deg); }
-    100% { transform: translateY(100vh) rotate(360deg); }
+.typing{
+  border-right:2px solid pink;
+  white-space:nowrap;
+  overflow:hidden;
 }
 </style>
 </head>
@@ -84,78 +63,95 @@ button {
 <body>
 
 <div class="container">
+  <div class="teddy">🧸</div>
 
-    <div class="teddy">🧸</div>
+  <div class="box" id="text"></div>
 
-    <div class="box" id="message">
-        Hi Rav 🥹<br><br>
-        How are you today? 💖
+  <div id="buttons">
+    <button onclick="notGood()">Not good 😔</button>
+    <button onclick="awesome()">Awesome 😄</button>
+  </div>
+
+  <div id="envelopeBox" class="hidden">
+    <div class="envelope" onclick="openLetter()">💌</div>
+  </div>
+
+  <div id="letter" class="hidden">
+    <div class="box">
+      Today is your birthday.<br><br>
+      I know I hurted you.<br>
+      I just wasn’t feeling well enough.<br><br>
+      I’m really sorry 🥺<br><br>
+      Please be happy from now on 💖<br><br>
+      Happiest Birthday Rav 🎂
     </div>
+    <button onclick="rollback()">Roll back 🎁</button>
+  </div>
 
-    <div id="buttons">
-        <button onclick="notGood()">Not good 😔</button>
-        <button onclick="awesome()">Awesome 😄</button>
-    </div>
+  <div id="cakeBox" class="hidden">
+    <div class="cake">🎂</div>
+  </div>
 
-    <div id="cakeSection" class="hidden">
-        <div class="box">
-            🎉 It’s your special day! 🎉<br><br>
-            <div class="cake">🎂</div><br>
-            Cut the cake, Rav 💖
-        </div>
-    </div>
-
-    <div id="letter" class="hidden">
-        <div class="box">
-            🧸💌<br><br>
-            Today is your birthday.<br>
-            I know I hurted you…<br><br>
-            I wasn’t feeling well enough that time.<br><br>
-            I’m really sorry 🥺<br><br>
-            From today and always,<br>
-            be happy and smile 💖<br><br>
-            Happiest Birthday Rav 🎂
-        </div>
-    </div>
-
+  <div id="heartBox" class="hidden">
+    <div class="heart">💗</div>
+  </div>
 </div>
 
 <script>
-function notGood() {
-    document.getElementById("buttons").classList.add("hidden");
-    setTimeout(() => {
-        document.getElementById("cakeSection").classList.remove("hidden");
-        startConfetti();
-    }, 1000);
-
-    setTimeout(() => {
-        document.getElementById("cakeSection").classList.add("hidden");
-        document.getElementById("letter").classList.remove("hidden");
-    }, 4500);
-}
-
-function awesome() {
-    document.getElementById("buttons").classList.add("hidden");
-    document.getElementById("cakeSection").classList.remove("hidden");
-    startConfetti();
-
-    setTimeout(() => {
-        document.getElementById("cakeSection").classList.add("hidden");
-        document.getElementById("letter").classList.remove("hidden");
-    }, 4000);
-}
-
-function startConfetti() {
-    for (let i = 0; i < 40; i++) {
-        let conf = document.createElement("div");
-        conf.className = "confetti";
-        conf.style.left = Math.random() * 100 + "vw";
-        conf.style.background = ["#ff6f91","#ffc75f","#845ec2","#4d96ff"][Math.floor(Math.random()*4)];
-        conf.style.animationDuration = (Math.random()*2 + 2) + "s";
-        document.body.appendChild(conf);
-
-        setTimeout(() => conf.remove(), 4000);
+function typeText(msg, cb){
+  let i=0;
+  const el=document.getElementById("text");
+  el.innerHTML="";
+  const interval=setInterval(()=>{
+    el.innerHTML+=msg.charAt(i);
+    i++;
+    if(i===msg.length){
+      clearInterval(interval);
+      if(cb) cb();
     }
+  },50);
+}
+
+function notGood(){
+  document.getElementById("buttons").classList.add("hidden");
+  typeText("I’m here. Smile with your heart 🤍",()=>{
+    setTimeout(()=>{
+      document.getElementById("letter").classList.remove("hidden");
+      document.getElementById("heartBox").classList.remove("hidden");
+    },1000);
+  });
+}
+
+function awesome(){
+  document.getElementById("buttons").classList.add("hidden");
+  typeText("That’s great! I have something for you…",()=>{
+    document.getElementById("envelopeBox").classList.remove("hidden");
+  });
+}
+
+function openLetter(){
+  document.getElementById("envelopeBox").classList.add("hidden");
+  document.getElementById("letter").classList.remove("hidden");
+}
+
+function rollback(){
+  document.getElementById("letter").classList.add("hidden");
+  document.getElementById("cakeBox").classList.remove("hidden");
+  confetti();
+  setTimeout(()=>{
+    typeText("I hope you succeed in your life ❤️🤞🏻");
+  },1000);
+}
+
+function confetti(){
+  for(let i=0;i<40;i++){
+    const c=document.createElement("div");
+    c.className="confetti";
+    c.style.left=Math.random()*100+"vw";
+    c.style.background=["#ff6f91","#ffc75f","#845ec2","#4d96ff"][Math.floor(Math.random()*4)];
+    document.body.appendChild(c);
+    setTimeout(()=>c.remove(),3000);
+  }
 }
 </script>
 
