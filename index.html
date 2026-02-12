@@ -1,111 +1,119 @@
-  <!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>For Rav 🧸</title>
+<title>For Rav</title>
 
 <style>
+*{box-sizing:border-box;}
 body{
   margin:0;
-  font-family:'Segoe UI',sans-serif;
-  background:linear-gradient(#ccefff,#eaf8ff);
+  font-family: "Segoe UI", sans-serif;
+  background: linear-gradient(#cfefff,#eaf7ff);
+  height:100vh;
+  overflow:hidden;
   display:flex;
   justify-content:center;
   align-items:center;
-  height:100vh;
-  overflow:hidden;
 }
 
 .container{
   width:95%;
   max-width:520px;
   text-align:center;
+  position:relative;
 }
 
-.teddy{
-  font-size:150px;
-  animation:bounce 2s infinite;
+.teddy img{
+  width:220px;
+  animation: float 3s ease-in-out infinite;
 }
 
-.teddy.talk{
-  animation:wave 1s infinite;
-}
-
-@keyframes bounce{
-  0%,100%{transform:translateY(0);}
-  50%{transform:translateY(-18px);}
-}
-
-@keyframes wave{
-  0%{transform:rotate(0deg);}
-  50%{transform:rotate(5deg);}
-  100%{transform:rotate(0deg);}
+@keyframes float{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-12px)}
 }
 
 .box{
   background:white;
-  padding:28px;
+  padding:25px;
+  margin-top:15px;
   border-radius:25px;
   box-shadow:0 15px 35px rgba(0,0,0,.2);
-  margin-top:15px;
-  font-size:20px;
+  font-size:22px;
 }
 
-button{
-  margin:15px;
-  padding:14px 30px;
+.buttons button{
+  margin:15px 10px;
+  padding:14px 32px;
+  font-size:18px;
   border:none;
   border-radius:30px;
-  background:#4da6ff;
+  background:#2f7de1;
   color:white;
-  font-size:18px;
-  cursor:pointer;
 }
 
 .hidden{display:none;}
 
 .envelope{
-  font-size:120px;
-  animation:pop 1.2s infinite;
+  width:260px;
+  height:170px;
+  margin:25px auto;
+  background:#0b2c5a;
+  border-radius:15px;
+  position:relative;
   cursor:pointer;
+  animation: pop 1s ease;
 }
 
-@keyframes pop{
-  0%{transform:scale(1);}
-  50%{transform:scale(1.15);}
-  100%{transform:scale(1);}
-}
-
-.letter{
-  background:#f7fbff;
-  border:4px solid #4da6ff;
-  border-radius:30px;
-  padding:35px;
-  font-size:20px;
-  animation:scaleIn .6s ease;
-}
-
-@keyframes scaleIn{
-  from{transform:scale(.6);opacity:0;}
-  to{transform:scale(1);opacity:1;}
+.envelope:before{
+  content:"";
+  position:absolute;
+  width:100%;
+  height:100%;
+  background:#133d7a;
+  clip-path: polygon(0 0,100% 0,50% 55%);
 }
 
 .bow{
-  font-size:40px;
+  position:absolute;
+  top:-18px;
+  left:50%;
+  transform:translateX(-50%);
+  width:60px;
+  height:30px;
+  background:#5fa9ff;
+  border-radius:15px;
 }
 
-.cake{font-size:120px;}
-.heart{font-size:90px;}
+@keyframes pop{
+  from{transform:scale(0)}
+  to{transform:scale(1)}
+}
+
+.letter{
+  background:url("assets/letter.png") center/cover no-repeat;
+  padding:70px 30px;
+  border-radius:25px;
+  font-size:20px;
+  animation: pop 1s ease;
+}
+
+.cake img{
+  width:220px;
+  animation: pop 1s ease;
+}
 
 .confetti{
   position:fixed;
-  width:10px;height:10px;
-  animation:fall 3s linear infinite;
+  width:10px;
+  height:10px;
+  animation: fall 3s linear infinite;
 }
 
 @keyframes fall{
-  0%{transform:translateY(-100px) rotate(0deg);}
-  100%{transform:translateY(100vh) rotate(360deg);}
+  from{transform:translateY(-50px)}
+  to{transform:translateY(110vh)}
 }
 </style>
 </head>
@@ -114,98 +122,78 @@ button{
 
 <div class="container">
 
-  <div id="teddy" class="teddy">🧸</div>
+  <div class="teddy">
+    <img src="assets/teddy.gif">
+  </div>
 
   <div class="box" id="text">
     Hi Rav 🥹<br><br>
     How are you today?
   </div>
 
-  <div id="buttons">
+  <div class="buttons" id="buttons">
     <button onclick="notGood()">Not good 😔</button>
     <button onclick="awesome()">Awesome 😄</button>
   </div>
 
-  <div id="envelopeBox" class="hidden">
-    <div class="envelope">💌</div>
-    <div class="bow">🎀</div>
-    <button onclick="openLetter()">Open</button>
+  <div id="envelope" class="hidden" onclick="openLetter()">
+    <div class="envelope">
+      <div class="bow"></div>
+    </div>
   </div>
 
   <div id="letterBox" class="hidden">
     <div class="letter">
       Today is your birthday.<br><br>
-      I know I hurted you.<br>
-      I just wasn’t feeling well enough.<br><br>
-      I’m really sorry 🥺<br><br>
-      From today and always,<br>
-      be happy and strong 💙<br><br>
+      I know I hurted you and I’m really sorry.<br>
+      I wasn’t feeling well enough at that time.<br><br>
+      From today and always — be happy and strong 💙<br><br>
       Happiest Birthday Rav 🎂
     </div>
-    <button onclick="rollback()">Roll back 🎁</button>
+    <br>
+    <button onclick="showCake()">Continue 🎁</button>
   </div>
 
-  <div id="endBox" class="hidden">
-    <div class="cake">🎂</div>
-    <div class="heart">💙</div>
+  <div id="cake" class="hidden cake">
+    <img src="assets/cake.png">
   </div>
 
 </div>
 
 <script>
-function typeText(msg, cb){
-  const el=document.getElementById("text");
-  const teddy=document.getElementById("teddy");
-  teddy.classList.add("talk");
-  el.innerHTML="";
-  let i=0;
-  const t=setInterval(()=>{
-    el.innerHTML+=msg.charAt(i);
-    i++;
-    if(i===msg.length){
-      clearInterval(t);
-      teddy.classList.remove("talk");
-      if(cb) cb();
-    }
-  },45);
-}
-
 function notGood(){
   document.getElementById("buttons").classList.add("hidden");
-  typeText("Smile with your heart. I’m here with you.",()=>{
-    setTimeout(()=>{
-      document.getElementById("endBox").classList.remove("hidden");
-    },800);
-  });
+  document.getElementById("text").innerHTML =
+  "Smile with your heart. I’m here with you 💙<br><br>I have something for you…";
+  document.getElementById("envelope").classList.remove("hidden");
 }
 
 function awesome(){
   document.getElementById("buttons").classList.add("hidden");
-  typeText("That’s great! I have something for you…",()=>{
-    document.getElementById("envelopeBox").classList.remove("hidden");
-  });
+  document.getElementById("text").innerHTML =
+  "That’s great! I have something special for you 🎁";
+  document.getElementById("envelope").classList.remove("hidden");
 }
 
 function openLetter(){
-  document.getElementById("envelopeBox").classList.add("hidden");
+  document.getElementById("envelope").classList.add("hidden");
   document.getElementById("letterBox").classList.remove("hidden");
 }
 
-function rollback(){
+function showCake(){
   document.getElementById("letterBox").classList.add("hidden");
-  document.getElementById("endBox").classList.remove("hidden");
+  document.getElementById("cake").classList.remove("hidden");
+  document.getElementById("text").innerHTML =
+  "I hope you succeed in your life ❤️🤞🏻";
   confetti();
-  setTimeout(()=>{
-    typeText("I hope you succeed in your life ❤️🤞🏻");
-  },1000);
 }
 
 function confetti(){
-  for(let i=0;i<50;i++){
-    const c=document.createElement("div");
+  for(let i=0;i<80;i++){
+    let c=document.createElement("div");
     c.className="confetti";
     c.style.left=Math.random()*100+"vw";
-    c.style.background=["#4da6ff","#66ccff","#99ddff"][Math.floor(Math.random()*3)];
+    c.style.background=["#2f7de1","#6fb8ff","#9fd3ff"][Math.floor(Math.random()*3)];
     document.body.appendChild(c);
     setTimeout(()=>c.remove(),3000);
   }
